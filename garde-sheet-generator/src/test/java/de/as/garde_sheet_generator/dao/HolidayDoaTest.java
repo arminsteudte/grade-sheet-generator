@@ -59,7 +59,7 @@ public class HolidayDoaTest {
 		assertFalse(holidays.isEmpty());
 		for( HolidayType type : HolidayType.values()) {
 			
-			assertTrue(holidays.stream().anyMatch(h -> h.getType() == type));
+			assertTrue(holidays.stream().anyMatch(h -> type == h.getType()));
 			
 		}
 
