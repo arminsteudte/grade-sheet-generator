@@ -2,13 +2,15 @@ package de.as.garde_sheet_generator.dao;
 
 import java.net.URI;
 import java.time.Year;
+import java.util.Optional;
 
+import javax.ws.rs.NotFoundException;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Invocation.Builder;
 import javax.ws.rs.core.UriBuilder;
 
-class SchulferienOrgProvider {
+public class SchulferienOrgProvider {
 
 	private static final String YEAR_PLACEHOLDER = "year";
 	private Client rsClient;
@@ -19,15 +21,22 @@ class SchulferienOrgProvider {
 		this.urlTemplate = providerUrlTemplate;
 	}
 
-	public String getHolidays(Year year) {
-		
+	public Optional<String> getHolidays(Year year) {
+
+		Optional<String> result = Optional.empty();
+
 		URI uri = UriBuilder.fromUri(urlTemplate).resolveTemplate(YEAR_PLACEHOLDER, year).build();
-		
+
 		Builder requBuilder = rsClient.target(uri).request();
 
-		String iCal = requBuilder.get(String.class);
-		
-		return iCal;
+		try {
+			String iCal = requBuilder.get(String.class);
+			result = Optional.of(iCal);
+		} catch (NotFoundException e) {
+			// TODO Logging	
+		}
+
+		return result;
 	}
 
 }

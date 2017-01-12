@@ -9,8 +9,10 @@ import de.as.garde_sheet_generator.model.Holiday;
 
 public class HolidayDao {
 
+	private final SchulferienOrgProvider holidayDataProvider;
+	
 	public HolidayDao(SchulferienOrgProvider provider) {
-		
+		this.holidayDataProvider = provider;
 	}
 
 	public List<Holiday> getHolidays(Year year, boolean halfSchoolYear) {
