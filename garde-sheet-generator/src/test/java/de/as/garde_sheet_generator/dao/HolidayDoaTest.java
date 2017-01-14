@@ -8,8 +8,11 @@ import static org.mockito.Mockito.when;
 import java.io.File;
 import java.io.IOException;
 import java.time.Year;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.junit.After;
 import org.junit.Before;
@@ -70,7 +73,11 @@ public class HolidayDoaTest {
 
 		// then
 		assertFalse(holidays.isEmpty());
-		for (HolidayType type : HolidayType.values()) {
+		
+		
+		List<HolidayType> realHolidayTypes = Arrays.stream(HolidayType.values()).filter(h -> h != HolidayType.UNKNOWN).collect(Collectors.toList());
+		
+		for (HolidayType type : realHolidayTypes) {
 
 			assertTrue(holidays.stream().anyMatch(h -> type == h.getType()));
 
