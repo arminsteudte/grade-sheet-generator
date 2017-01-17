@@ -8,11 +8,8 @@ import static org.mockito.Mockito.when;
 import java.io.File;
 import java.io.IOException;
 import java.time.Year;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import org.junit.After;
 import org.junit.Before;
@@ -21,14 +18,12 @@ import org.junit.Test;
 import biweekly.Biweekly;
 import biweekly.ICalendar;
 import de.as.garde_sheet_generator.model.Holiday;
-import de.as.garde_sheet_generator.model.Holiday.HolidayType;
 
 public class HolidayDoaTest {
 
 	private static final String I_CAL_DUMP_FILE_NAME = "iCal_Dump_2017.ics";
 	private static final int KNOWN_YEAR = 2017;
 	private static final int UNKNOWN_YEAR = 1888;
-	private static final String PROVIDER_URI_TEMPLATE = "http://www.schulferien.org/media/ical/deutschland/ferien_niedersachsen_{year}.ics";
 	private HolidayDao dao;
 
 	@Before
@@ -51,10 +46,9 @@ public class HolidayDoaTest {
 
 		// given
 		final Year year = Year.of(UNKNOWN_YEAR);
-		final boolean halfSchoolYear = false;
 
 		// when
-		List<Holiday> holidays = this.dao.getHolidays(year, halfSchoolYear);
+		List<Holiday> holidays = this.dao.getHolidays(year);
 
 		// then
 		assertTrue(holidays.isEmpty());
@@ -66,20 +60,18 @@ public class HolidayDoaTest {
 
 		// given
 		final Year year = Year.of(KNOWN_YEAR);
-		final boolean halfSchoolYear = false;
 
 		// when
-		List<Holiday> holidays = this.dao.getHolidays(year, halfSchoolYear);
+		List<Holiday> holidays = this.dao.getHolidays(year);
 
 		// then
 		assertFalse(holidays.isEmpty());
-		
-		
-		List<HolidayType> realHolidayTypes = Arrays.stream(HolidayType.values()).filter(h -> h != HolidayType.UNKNOWN).collect(Collectors.toList());
-		
-		for (HolidayType type : realHolidayTypes) {
 
-			assertTrue(holidays.stream().anyMatch(h -> type == h.getType()));
+		String[] expectedHolidayDesc = {"Winterferien", "Osterferien", "Pfingstferien", "Sommerferien", "Herbstferien"};
+
+		for (String desc : expectedHolidayDesc) {
+
+			assertTrue(holidays.stream().anyMatch(h -> h.getDescription().equals(desc)));
 
 		}
 
@@ -87,7 +79,7 @@ public class HolidayDoaTest {
 
 	private SchulferienOrgProvider createHolidayProviderMock() throws IOException {
 		SchulferienOrgProvider holidayProviderMock = mock(SchulferienOrgProvider.class);
-		File dumpFile = new File(this.getClass().getResource("/"+I_CAL_DUMP_FILE_NAME).getFile());
+		File dumpFile = new File(this.getClass().getResource("/" + I_CAL_DUMP_FILE_NAME).getFile());
 		ICalendar iCalDump = Biweekly.parse(dumpFile).first();
 		when(holidayProviderMock.getHolidays(Year.of(KNOWN_YEAR))).thenReturn(Optional.of(iCalDump.write()));
 		when(holidayProviderMock.getHolidays(Year.of(UNKNOWN_YEAR))).thenReturn(Optional.empty());

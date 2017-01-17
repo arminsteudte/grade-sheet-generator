@@ -12,7 +12,6 @@ import biweekly.Biweekly;
 import biweekly.ICalendar;
 import biweekly.component.VEvent;
 import de.as.garde_sheet_generator.model.Holiday;
-import de.as.garde_sheet_generator.model.Holiday.HolidayType;
 
 public class HolidayDao {
 
@@ -23,7 +22,7 @@ public class HolidayDao {
 		this.holidayDataProvider = provider;
 	}
 
-	public List<Holiday> getHolidays(Year year, boolean halfSchoolYear) {
+	public List<Holiday> getHolidays(Year year) {
 
 		List<Holiday> result = new ArrayList<>();
 
@@ -41,37 +40,12 @@ public class HolidayDao {
 	static Holiday convertEventToHoliday(VEvent ev) {
 
 		String holidayDescr = ev.getSummary().getValue().split(" ")[INDEX_HOLIDAY_DESCRIPTION];
-		HolidayType type = HolidayType.UNKNOWN;
-
-		switch (holidayDescr) {
-		case "Winterferien":
-			type = HolidayType.WINTER;
-			break;
-		case "Osterferien":
-			type = HolidayType.EASTER;
-			break;
-		case "Pfingstferien":
-			type = HolidayType.PENTECOST;
-			break;
-		case "Sommerferien":
-			type = HolidayType.SUMMER;
-			break;
-		case "Herbstferien":
-			type = HolidayType.AUTUMN;
-			break;
-		case "Weihnachtsferien":
-			type = HolidayType.CHRISTMAS;
-			break;
-		default:
-			System.err.println("Unknown holiday: " + holidayDescr);
-			break;
-		}
-
+	
 		TimeZone localTimeZone = TimeZone.getDefault();
 		LocalDate startDate = LocalDate.from(ev.getDateStart().getValue().toInstant().atZone(localTimeZone.toZoneId()));
 		LocalDate endDate = LocalDate.from(ev.getDateEnd().getValue().toInstant().atZone(localTimeZone.toZoneId()));
 
-		return new Holiday(type, startDate, endDate);
+		return new Holiday(holidayDescr, startDate, endDate);
 
 	}
 }

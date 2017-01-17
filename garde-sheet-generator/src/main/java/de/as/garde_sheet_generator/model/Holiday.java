@@ -4,18 +4,18 @@ import java.time.LocalDate;
 
 public class Holiday {
 
-	private final HolidayType type;
+	private final String description;
 	private final LocalDate start;
 	private final LocalDate end;
 
-	public Holiday(HolidayType type, LocalDate start, LocalDate end) {
-		this.type = type;
+	public Holiday(String desc, LocalDate start, LocalDate end) {
+		this.description = desc;
 		this.start = start;
 		this.end = end;
 	}
 
-	public HolidayType getType() {
-		return type;
+	public String getDescription() {
+		return description;
 	}
 
 	public LocalDate getStart() {
