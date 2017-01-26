@@ -10,22 +10,23 @@ import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Invocation.Builder;
 import javax.ws.rs.core.UriBuilder;
 
-public class SchulferienOrgProvider {
+public class SchulferienDeutschlandProvider {
 
 	private static final String YEAR_PLACEHOLDER = "year";
+	private static final String STATE_PLACEHOLDER = "state";
 	private Client rsClient;
 	private final String urlTemplate;
 
-	public SchulferienOrgProvider(String providerUrlTemplate) {
+	public SchulferienDeutschlandProvider(String providerUrlTemplate) {
 		rsClient = ClientBuilder.newClient();
 		this.urlTemplate = providerUrlTemplate;
 	}
 
-	public Optional<String> getHolidays(Year year) {
+	public Optional<String> getHolidays(String state,Year year) {
 
 		Optional<String> result = Optional.empty();
 
-		URI uri = UriBuilder.fromUri(urlTemplate).resolveTemplate(YEAR_PLACEHOLDER, year).build();
+		URI uri = UriBuilder.fromUri(urlTemplate).resolveTemplate(YEAR_PLACEHOLDER, year).resolveTemplate(STATE_PLACEHOLDER, state).build();
 
 		Builder requBuilder = rsClient.target(uri).request();
 

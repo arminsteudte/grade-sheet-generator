@@ -12,21 +12,24 @@ import biweekly.Biweekly;
 import biweekly.ICalendar;
 import biweekly.component.VEvent;
 import de.as.garde_sheet_generator.model.Holiday;
+import de.as.garde_sheet_generator.model.State;
 
 public class HolidayDao {
 
 	private static final int INDEX_HOLIDAY_DESCRIPTION = 0;
-	private final SchulferienOrgProvider holidayDataProvider;
+	private final SchulferienDeutschlandProvider holidayDataProvider;
+	private final StateConverter converter;
 
-	public HolidayDao(SchulferienOrgProvider provider) {
+	public HolidayDao(SchulferienDeutschlandProvider provider, StateConverter con) {
 		this.holidayDataProvider = provider;
+		this.converter = con;
 	}
 
-	public List<Holiday> getHolidays(Year year) {
+	public List<Holiday> getHolidays(State state, Year year) {
 
 		List<Holiday> result = new ArrayList<>();
-
-		Optional<String> optionalHolidays = this.holidayDataProvider.getHolidays(year);
+		final String convertedState = converter.convert(state);
+		Optional<String> optionalHolidays = this.holidayDataProvider.getHolidays(convertedState, year);
 
 		ICalendar cal = Biweekly.parse(optionalHolidays.orElse("")).first();
 

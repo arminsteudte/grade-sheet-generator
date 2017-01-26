@@ -1,0 +1,65 @@
+BEGIN:VCALENDAR
+METHOD:PUBLISH
+PRODID:PHP
+VERSION:2.0
+BEGIN:VEVENT
+CREATED:20170126T100116Z
+LAST-MODIFIED:20170126T100116Z
+DTSTAMP:20170126T100116Z
+SUMMARY:Sommerferien niedersachsen
+DTSTART;VALUE=DATE:20160623
+DTEND;VALUE=DATE:20160803
+URL:http://www.schulferien-deutschland.net
+DESCRIPTION:Ferien in NI von www.schulferien-deutschland.net
+TRANSP:TRANSPARENT
+UID:Sommerferien-niedersachsen-1485446476@schulferien-deutschland.net
+END:VEVENT
+BEGIN:VEVENT
+CREATED:20170126T100116Z
+LAST-MODIFIED:20170126T100116Z
+DTSTAMP:20170126T100116Z
+SUMMARY:Herbstferien niedersachsen
+DTSTART;VALUE=DATE:20161004
+DTEND;VALUE=DATE:20161015
+URL:http://www.schulferien-deutschland.net
+DESCRIPTION:Ferien in NI von www.schulferien-deutschland.net
+TRANSP:TRANSPARENT
+UID:Herbstferien-niedersachsen-1485446477@schulferien-deutschland.net
+END:VEVENT
+BEGIN:VEVENT
+CREATED:20170126T100116Z
+LAST-MODIFIED:20170126T100116Z
+DTSTAMP:20170126T100116Z
+SUMMARY:Weihnachtsferien niedersachsen
+DTSTART;VALUE=DATE:20161221
+DTEND;VALUE=DATE:20170106
+URL:http://www.schulferien-deutschland.net
+DESCRIPTION:Ferien in NI von www.schulferien-deutschland.net
+TRANSP:TRANSPARENT
+UID:Weihnachtsferien-niedersachsen-1485446478@schulferien-deutschland.net
+END:VEVENT
+BEGIN:VEVENT
+CREATED:20170126T100116Z
+LAST-MODIFIED:20170126T100116Z
+DTSTAMP:20170126T100116Z
+SUMMARY:Osterferien niedersachsen
+DTSTART;VALUE=DATE:20160318
+DTEND;VALUE=DATE:20160402
+URL:http://www.schulferien-deutschland.net
+DESCRIPTION:Ferien in NI von www.schulferien-deutschland.net
+TRANSP:TRANSPARENT
+UID:Osterferien-niedersachsen-1485446479@schulferien-deutschland.net
+END:VEVENT
+BEGIN:VEVENT
+CREATED:20170126T100116Z
+LAST-MODIFIED:20170126T100116Z
+DTSTAMP:20170126T100116Z
+SUMMARY:Winterferien niedersachsen
+DTSTART;VALUE=DATE:20160128
+DTEND;VALUE=DATE:20160129
+URL:http://www.schulferien-deutschland.net
+DESCRIPTION:Ferien in NI von www.schulferien-deutschland.net
+TRANSP:TRANSPARENT
+UID:Winterferien-niedersachsen-1485446480@schulferien-deutschland.net
+END:VEVENT
+END:VCALENDAR

@@ -26,22 +26,4 @@ public class Holiday {
 		return end;
 	}
 
-	public enum HolidayType {
-		
-		// TODO Is UNKNOWN a good idea? Compare unit test.
-		WINTER("Winterferien"), EASTER("Osterferien"), PENTECOST("Pfingstferien"), SUMMER("Sommerferien"), AUTUMN(
-				"Herbstferien"), CHRISTMAS("Weihnachtsferien"), UNKNOWN("Unbekannt");
-
-		private final String fullDescription;
-
-		private HolidayType(String fullDesc) {
-			this.fullDescription = fullDesc;
-		}
-
-		public String getFullDescription() {
-			return fullDescription;
-		}
-
-	}
-
 }

@@ -3,14 +3,14 @@ package de.as.garde_sheet_generator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import de.as.garde_sheet_generator.dao.SchulferienOrgProvider;
+import de.as.garde_sheet_generator.dao.SchulferienDeutschlandProvider;
 
 @Configuration
 public class AppConfig {
 	
 	@Bean
-	public SchulferienOrgProvider holidayProvider() {
-		return new SchulferienOrgProvider("");
+	public SchulferienDeutschlandProvider holidayProvider() {
+		return new SchulferienDeutschlandProvider("");
 	}
 	
 }

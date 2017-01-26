@@ -1,6 +1,9 @@
 package de.as.garde_sheet_generator;
 
-import static org.junit.Assert.*;
+import static org.hamcrest.text.IsEmptyString.isEmptyOrNullString;
+import static org.junit.Assert.assertThat;
+import static org.hamcrest.Matchers.not;
+import static org.hamcrest.Matchers.is;
 
 import java.net.URI;
 import java.time.Year;
@@ -11,15 +14,15 @@ import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Invocation.Builder;
 import javax.ws.rs.core.UriBuilder;
 
-import org.apache.commons.lang3.StringUtils;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class SchulferienOrgIT {
+public class SchulferienProviderIT {
 
 	private static Client rsClient;
-	private static final String PROVIDER_URI_TEMPLATE = "http://www.schulferien.org/media/ical/deutschland/ferien_niedersachsen_{year}.ics";
+	private static final String PROVIDER_URI_TEMPLATE = "http://www.schulferien-deutschland.net/ical/ferien-{state}-{year}.ics";
+	private static final String DEFAULT_STATE = "niedersachsen";
 
 	@BeforeClass
 	public static void setUpJaxRSClient() {
@@ -31,7 +34,8 @@ public class SchulferienOrgIT {
 
 		// given
 		final int recentYear = Year.now().getValue();
-		URI targetUri = UriBuilder.fromPath(PROVIDER_URI_TEMPLATE).build(recentYear);
+		
+		URI targetUri = UriBuilder.fromPath(PROVIDER_URI_TEMPLATE).build(DEFAULT_STATE, recentYear);
 
 		Builder requBuilder = rsClient.target(targetUri).request();
 
@@ -39,8 +43,7 @@ public class SchulferienOrgIT {
 		String iCal = requBuilder.get(String.class);
 
 		// then
-		assertNotNull(iCal);
-		assertFalse(StringUtils.isEmpty(iCal));
+		assertThat(iCal, is(not(isEmptyOrNullString())));
 
 		/**
 		 * Create Dump for iCal
@@ -63,7 +66,7 @@ public class SchulferienOrgIT {
 
 		// given
 		final int recentYear = 1888;
-		URI targetUri = UriBuilder.fromPath(PROVIDER_URI_TEMPLATE).build(recentYear);
+		URI targetUri = UriBuilder.fromPath(PROVIDER_URI_TEMPLATE).build(DEFAULT_STATE, recentYear);
 		
 		Builder requBuilder = rsClient.target(targetUri).request();
 
