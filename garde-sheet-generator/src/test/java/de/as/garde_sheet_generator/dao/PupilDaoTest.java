@@ -44,6 +44,9 @@ public class PupilDaoTest {
 		
 		// then
 		assertThat(pupils, is(not(emptyCollectionOf(Pupil.class))));
+		assertThat(pupils.size(), is(30));
+		assertThat(pupils.get(3).getFirstName(), is("Corvin"));
+		
 	}
 
 }
