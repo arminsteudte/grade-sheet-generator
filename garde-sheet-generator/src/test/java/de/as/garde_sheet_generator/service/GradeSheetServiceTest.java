@@ -13,16 +13,17 @@ import java.util.stream.Collectors;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 
 import de.as.garde_sheet_generator.dao.HolidayDao;
 import de.as.garde_sheet_generator.dao.PupilDao;
+import de.as.garde_sheet_generator.dao.SheetDao;
 
 public class GradeSheetServiceTest {
 
 	private HolidayDao holidaySupplier;
 	private PupilDao pupilSupplier;
+	private SheetDao sheetWriter;
 	
 	private GradeSheetService service;
 	
@@ -30,8 +31,9 @@ public class GradeSheetServiceTest {
 	public void setUp() {
 		this.holidaySupplier = mock(HolidayDao.class);
 		this.pupilSupplier = mock(PupilDao.class);
+		this.sheetWriter = mock(SheetDao.class);
 		
-		this.service = new GradeSheetService(holidaySupplier, pupilSupplier);
+		this.service = new GradeSheetService(holidaySupplier, pupilSupplier, sheetWriter);
 	}
 	
 	@Test
