@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URI;
-import java.security.spec.EncodedKeySpec;
 import java.time.DayOfWeek;
 import java.time.Duration;
 import java.time.LocalDate;
@@ -19,7 +18,6 @@ import java.util.stream.Collectors;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 
 import com.google.common.annotations.VisibleForTesting;
-import com.microsoft.schemas.office.x2006.encryption.CTKeyEncryptor.Uri;
 
 import de.as.garde_sheet_generator.dao.HolidayDao;
 import de.as.garde_sheet_generator.dao.PupilDao;
